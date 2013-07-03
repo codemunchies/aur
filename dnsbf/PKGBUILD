@@ -25,5 +25,5 @@ package() {
   cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
 
   # CREATE A SOFTLINK AS dnsbf
-  ln -s ${pkgdir}/usr/bin/dnsbf/dnsbf.py ${pkgdir}/usr/bin/dnsbf
+  ln -s ${pkgdir}/usr/bin/dnsbf/dnsbf.py ${pkgdir}/usr/bin/dnsbfpy
 }
