@@ -23,4 +23,7 @@ package() {
   cd "${srcdir}"/${pkgname}
   install -dm755 ${pkgdir}/usr/bin/${pkgname}
   cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+
+  # CREATE A SOFTLINK AS dnsbf
+  ln -s ${pkgdir}/usr/bin/dnsbf/dnsbf.py ${pkgdir}/usr/bin/dnsbf
 }
