@@ -2,7 +2,7 @@
 
 pkgname=netcommander
 pkgver=git
-pkgrel=4
+pkgrel=5
 pkgdesc="an easy to use arp spoofing tool"
 arch=('i686' 'x86_64')
 url=('https://github.com/evilsocket/netcommander')
