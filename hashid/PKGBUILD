@@ -1,0 +1,26 @@
+# Maintainer: Ari Mizrahi <codemunchies@gmail.com>
+
+pkgname=hashid
+pkgver=svn
+pkgrel=1
+pkgdesc="software to identify the different types of hashes used to encrypt data and especially passwords"
+arch=('i686' 'x86_64')
+url=('http://code.google.com/p/hash-identifier')
+license=('GPL3')
+makedepends=('subversion')
+depends=('python2')
+md5sums=('')
+
+_svntrunk=('http://hash-identifier.googlecode.com/svn/trunk/')
+
+package() {
+	# CHECKOUT CODEBASE
+  svn co ${_svntrunk} ${pkgname}
+
+  # FIX PYTHON SHEBANGS
+  find "${srcdir}"/${pkgname} -type f -exec sed -i 's/#!\/usr\/bin\/python/#!\/usr\/bin\/python2/g' {} \; 
+
+  cd "${srcdir}"/${pkgname}/Hash_ID_v${pkgver}
+  install -dm755 ${pkgdir}/usr/bin/${pkgname}
+  cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+}
