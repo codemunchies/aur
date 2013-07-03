@@ -59,7 +59,7 @@ build() {
 }
 
 package() {
-  cd "${srcdir}/${pkgname}-${pkgver}
+  cd "${srcdir}"/${pkgname}-${pkgver}
 
   ## COPY ALL THE BINARIES AND SOURCE CODE
   install -dm755 ${pkgdir}/usr/bin/netglub
