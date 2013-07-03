@@ -23,4 +23,7 @@ package() {
   cd "${srcdir}"/${pkgname}/Hash_ID_v${pkgver}
   install -dm755 ${pkgdir}/usr/bin/${pkgname}
   cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+
+  # CREATE A SOFTLINK AS netcmd
+  ln -s ${pkgdir}/usr/bin/hashid/Hash_ID.py ${pkgdir}/usr/bin/hashid
 }
