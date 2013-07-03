@@ -25,5 +25,5 @@ package() {
   cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
 
   # CREATE A SOFTLINK AS netcmd
-  ln -s ${pkgdir}/usr/bin/hashid/Hash_ID.py ${pkgdir}/usr/bin/hashid
+  ln -s ${pkgdir}/usr/bin/hashid/Hash_ID.py ${pkgdir}/usr/bin/hashidpy
 }
