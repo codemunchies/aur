@@ -6,13 +6,22 @@ pkgrel=1
 pkgdesc="an IP network tool for generating geotargeted lists of IP addresses"
 arch=('i686' 'x86_64')
 url=('http://code.google.com/p/geoipgen')
-license=('BSD 3 clause')
-source=("http://geoipgen.googlecode.com/files/${pkgname}-${pkgver}.tar.gz")
+license=('BSD')
 depends=('ruby')
+source=("http://geoipgen.googlecode.com/files/$pkgname-$pkgver.tar.gz")
 md5sums=('edae9618c3413be8e380f1e10b5b91dd')
 
 package() {
-  cd "${srcdir}"/${pkgname}-${pkgver}
-  install -dm755 ${pkgdir}/usr/bin/${pkgname}
-  cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+  cd "$srcdir/$pkgname-$pkgver"
+
+  install -dm755 "$pkgdir/usr/share/geoipgen"
+  install -dm755 "$pkgdir/usr/bin"
+
+  cp --no-preserve=ownership -R * "$pkgdir/usr/share/geoipgen"
+
+  cat > "$pkgdir/usr/bin/geoipgen" <<EOF
+#!/bin/sh
+ruby /usr/share/geoipgen/geoipgen "\$@"
+EOF
+  chmod +x "$pkgdir/usr/bin/geoipgen"
 }
