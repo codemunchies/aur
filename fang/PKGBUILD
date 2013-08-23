@@ -2,25 +2,30 @@
 
 pkgname=fang
 pkgver=git
-pkgrel=1
+pkgrel=2
 pkgdesc="a multi service threaded MD5 cracker"
 arch=('i686' 'x86_64')
 url=('https://github.com/evilsocket/fang')
 license=('GPL2')
-makedepends=('git')
 depends=('python2')
+makedepends=('git')
+source=('git+https://github.com/evilsocket/fang')
 md5sums=('')
 
-_gitrepo=('https://github.com/evilsocket/fang')
+prepare() {
+  cd "$srcir/fang"
+
+  sed -i 's|fang\.conf|/etc/fang.conf|' fang.py
+
+  sed -i 's|python$|python2|' fang.py
+}
 
 package() {
-	# CLONE REPOSITORY
-  git clone ${_gitrepo} ${pkgname}
+  cd "$srcdir/fang"
 
-  # FIX PYTHON SHEBANGS
-  find "${srcdir}"/${pkgname} -type f -exec sed -i 's/#!\/usr\/bin\/python/#!\/usr\/bin\/python2/g' {} \;
+  install -dm755 "$pkgdir/etc"
+  install -dm755 "$pkgdir/usr/bin"
 
-  cd "${srcdir}"/${pkgname}
-  install -dm755 ${pkgdir}/usr/bin/${pkgname}
-  cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+  install -m755 fang.py "$pkgdir/usr/bin/fang"
+  install -m644 fang.conf "$pkgdir/etc/fang.conf"
 }
