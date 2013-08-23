@@ -2,7 +2,7 @@
 
 pkgname=geoipgen
 pkgver=0.4
-pkgrel=1
+pkgrel=2
 pkgdesc="an IP network tool for generating geotargeted lists of IP addresses"
 arch=('i686' 'x86_64')
 url=('http://code.google.com/p/geoipgen')
