@@ -2,7 +2,7 @@
 
 pkgname=dnsbf
 pkgver=svn
-pkgrel=1
+pkgrel=2
 pkgdesc="search for available domain names in an IP range"
 arch=('i686' 'x86_64')
 url=('http://code.google.com/p/dnsbf')
