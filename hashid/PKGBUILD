@@ -2,28 +2,28 @@
 
 pkgname=hashid
 pkgver=1.1
-pkgrel=1
+pkgrel=2
 pkgdesc="software to identify the different types of hashes used to encrypt data and especially passwords"
 arch=('i686' 'x86_64')
 url=('http://code.google.com/p/hash-identifier')
 license=('GPL3')
-makedepends=('subversion')
 depends=('python2')
-md5sums=('')
-
-_svntrunk=('http://hash-identifier.googlecode.com/svn/trunk/')
+makedepends=('subversion')
+source=('svn+http://hash-identifier.googlecode.com/svn/trunk/')
+md5sums=('SKIP')
 
 package() {
-	# CHECKOUT CODEBASE
-  svn co ${_svntrunk} ${pkgname}
+  cd "$srcdir/trunk/Hash_ID_v1.1"
 
-  # FIX PYTHON SHEBANGS
-  find "${srcdir}"/${pkgname} -type f -exec sed -i 's/#!\/usr\/bin\/env\spython/#!\/usr\/bin\/python2/g' {} \; 
+  install -dm755 "$pkgdir/usr/bin"
+  install -dm755 "$pkgdir/usr/share/hashid"
 
-  cd "${srcdir}"/${pkgname}/Hash_ID_v${pkgver}
-  install -dm755 ${pkgdir}/usr/bin/${pkgname}
-  cp --preserve=mode -r * ${pkgdir}/usr/bin/${pkgname}
+  install -m755 Hash_ID.py "$pkgdir/usr/share/hashid"
 
-  # CREATE A SOFTLINK AS netcmd
-  ln -s ${pkgdir}/usr/bin/hashid/Hash_ID.py ${pkgdir}/usr/bin/hashidpy
+  cat > "$pkgdir/usr/bin/hashid" <<EOF
+#!/bin/sh
+cd /usr/share/hashid
+python2 Hash_ID.py "\@"
+EOF
+  chmod +x "$pkgdir/usr/bin/hashid"
 }
