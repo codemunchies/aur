@@ -10,10 +10,10 @@ license=('GPL2')
 depends=('python2')
 makedepends=('git')
 source=('git+https://github.com/evilsocket/fang')
-md5sums=('')
+md5sums=('SKIP')
 
 prepare() {
-  cd "$srcir/fang"
+  cd "$srcdir/fang"
 
   sed -i 's|fang\.conf|/etc/fang.conf|' fang.py
 
