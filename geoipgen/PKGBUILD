@@ -1,10 +1,11 @@
-# Maintainer: Ari Mizrahi <codemunchies@gmail.com>
+# Maintainer: Ari Mizrahi <codemunchies at debugsecurity dot com>
+# Contributor: ArchAssault Project <https://www.archassault.org>
 
 pkgname=geoipgen
 pkgver=0.4
-pkgrel=2
-pkgdesc="an IP network tool for generating geotargeted lists of IP addresses"
-arch=('i686' 'x86_64')
+pkgrel=3
+pkgdesc="An IP network tool for generating geotargeted lists of IP addresses"
+arch=('any')
 url=('http://code.google.com/p/geoipgen')
 license=('BSD')
 depends=('ruby')
@@ -14,14 +15,9 @@ md5sums=('edae9618c3413be8e380f1e10b5b91dd')
 package() {
   cd "$srcdir/$pkgname-$pkgver"
 
-  install -dm755 "$pkgdir/usr/share/geoipgen"
-  install -dm755 "$pkgdir/usr/bin"
+  install -Dm755 geoipgen $pkgdir/usr/bin/geoipgen
 
-  cp --no-preserve=ownership -R * "$pkgdir/usr/share/geoipgen"
-
-  cat > "$pkgdir/usr/bin/geoipgen" <<EOF
-#!/bin/sh
-ruby /usr/share/geoipgen/geoipgen "\$@"
-EOF
-  chmod +x "$pkgdir/usr/bin/geoipgen"
+  for f in README CHANGELOG TODO; do
+    install -Dm644 $f $pkgdir/usr/share/doc/geoipgen/$f
+  done
 }
