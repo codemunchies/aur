@@ -55,4 +55,3 @@ package() {
   cd ../../slave/tools
   ./install.sh
 }
-}
