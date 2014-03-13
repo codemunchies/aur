@@ -4,7 +4,7 @@
 pkgname=dnsbf
 pkgver=svn
 pkgrel=3
-pkgdesc="search for available domain names in an IP range"
+pkgdesc="Search for available domain names in an IP range"
 arch=('any')
 url=('http://code.google.com/p/dnsbf')
 license=('BSD')
